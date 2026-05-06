@@ -1,0 +1,46 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+*.log
+.agent/
+.claude/
+.cursor/
+.vscode/
+
+# debug
+npm-debug.log*
+dev-server*.log
+firebase-debug.log
+
+# env files
+.env
+.env.*
+!.env.example
+
+# local deployment targets
+.firebaserc
+
+# internal agent/tooling context
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+**/CLAUDE.md
+**/AGENTS.md
+**/GEMINI.md
+context.md
+debug agent.md
+prompt.md
+docs/
+
+# vercel
+.vercel

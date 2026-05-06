@@ -1,0 +1,181 @@
+/* Synex — A daily companion */
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #F8F5EF;
+  --color-paper-2: #EFEAE0;
+  --color-paper-3: #E4DDCD;
+  --color-ink: #1B1A17;
+  --color-ink-2: #3D3A33;
+  --color-ink-3: #7A7367;
+  --color-rule: #DDD6C5;
+  --color-rule-strong: #B8AE96;
+  --color-accent: #C2410C;
+  --color-accent-2: #9A2E06;
+  --color-blush: #F5DDD0;
+  --color-leaf: #4D6B3A;
+  --color-warn: #B45309;
+  --color-danger: #9F1239;
+
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --ease-synex: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection { background-color: var(--color-accent); color: var(--color-paper); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 2px; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-rule); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-rule-strong); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Hand-drawn scribble underline — used for emphasis on key words */
+  .scribble {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .scribble::after {
+    content: "";
+    position: absolute;
+    left: -3%;
+    right: -3%;
+    bottom: -10px;
+    height: 10px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'><path d='M2 7 Q 25 2, 55 6 T 110 5 T 165 6 T 198 5' stroke='%23C2410C' stroke-width='2.2' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  /* Companion voice — italic warm aside, like a friend writing in the margin */
+  .companion-voice {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-accent);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .companion-voice--lg {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--color-ink);
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  /* Soft rounded card with warm border */
+  .warm-card {
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    border-radius: 18px;
+    padding: 1.5rem;
+  }
+
+  /* Pulse dot — for "I'm here" presence */
+  .pulse-dot {
+    position: relative;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-leaf);
+  }
+  .pulse-dot::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: var(--color-leaf);
+    opacity: 0.3;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+
+  .prose-synex {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .prose-synex h1, .prose-synex h2, .prose-synex h3, .prose-synex h4 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    margin-top: 1.4em;
+    margin-bottom: 0.4em;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .prose-synex h1 { font-size: 1.7rem; }
+  .prose-synex h2 { font-size: 1.35rem; font-style: italic; }
+  .prose-synex h3 { font-size: 1.1rem; color: var(--color-accent); }
+  .prose-synex p { margin: 0 0 1em 0; }
+  .prose-synex ul, .prose-synex ol { margin: 0 0 1em 0; padding-left: 1.4em; }
+  .prose-synex li { margin: 0.3em 0; }
+  .prose-synex li::marker { color: var(--color-accent); }
+  .prose-synex strong { font-weight: 600; }
+  .prose-synex em { font-style: italic; color: var(--color-accent-2); }
+  .prose-synex code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-paper-2);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  .prose-synex pre {
+    font-family: var(--font-mono);
+    background: var(--color-paper-2);
+    border: 1px solid var(--color-rule);
+    border-radius: 8px;
+    padding: 1em;
+    overflow-x: auto;
+    margin: 1em 0;
+    font-size: 0.875em;
+  }
+  .prose-synex blockquote {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1em;
+    margin: 1em 0;
+    font-style: italic;
+    color: var(--color-ink-2);
+  }
+  .prose-synex a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+  .prose-synex hr { border: 0; height: 1px; background: var(--color-rule); margin: 1.5em 0; }
+
+  .synex-caret::after {
+    content: "▍";
+    color: var(--color-accent);
+    margin-left: 1px;
+    animation: synex-blink 0.9s steps(2) infinite;
+  }
+  @keyframes synex-blink { 50% { opacity: 0; } }
+
+  .synex-hairline-pulse { animation: synex-hairline 1.4s ease-in-out infinite; }
+  @keyframes synex-hairline { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+}
